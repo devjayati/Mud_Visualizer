@@ -1,0 +1,37 @@
+<html>
+
+<head>
+<title>Mud Visualizer Usability Testing</title>
+</head>
+
+<body>
+
+<p>This is an R HTML document. When you click the <b>Knit HTML</b> button a web page will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:</p>
+
+
+<p>Accuracy</p>
+
+ggboxplot(combined, x = "group", y = "acc", color = "group", palette = c("#00AFBB", "#E7B800"), order = c("plain", "mudviz"), ylab = "Accuracy", xlab = "Groups")
+signedtest <- wilcox.test(totacc_mud, totacc_plain, paired = TRUE)
+signedtest
+z <- abs(qnorm((signedtest$p.value)/2))
+effect_size <- z/sqrt(26)
+
+<p>Time</p>
+
+ggboxplot(combined, x = "group", y = "norm_time", color = "group", palette = c("#00AFBB", "#E7B800"), order = c("plain", "mudviz"), ylab = "Time", xlab = "Groups")
+signedtest2 <- wilcox.test(time_mud, time_plain, paired = TRUE)
+signedtest2
+z2 <- abs(qnorm(signedtest2$p.value/2))
+effect_size2 <- z2/sqrt(26)
+
+<p>Usability</p>
+
+ggboxplot(combined, x = "group", y = "totalsusfinal", color = "group", palette = c("#00AFBB", "#E7B800"), order = c("plain", "mudviz"), ylab = "Usability", xlab = "Groups")
+signedtest3 <- wilcox.test(sus_mud, sus_plain, conf.level = 0.95, alternative = "two.sided", paired = TRUE) #set to paired, two sided test
+signedtest3
+z3 <- abs(qnorm(signedtest3$p.value/2))
+effect_size3 <- z3/sqrt(26)
+
+</body>
+</html>
